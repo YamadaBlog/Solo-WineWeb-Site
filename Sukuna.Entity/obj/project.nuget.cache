@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Nq8zfrKdazLbsXgM+5nTeMDnPdQhaMVDpVdjUoM4ErGEKJm08hJwVvmf667DmDCLqErK5XLECqMuE+bVT0+dow==",
+  "dgSpecHash": "tAH7NK93nAmjExP144o9nhT4Z2I3txzZn4KuCiXnM8MYhnXQjkLRuUBc1CPIFof56sHJ4FCz0czD5m9xIkT09A==",
   "success": true,
-  "projectFilePath": "C:\\loicm\\dev\\WineWeb.API\\Sukuna.API\\Sukuna.Entity\\Sukuna.Common.csproj",
+  "projectFilePath": "C:\\loicm\\dev\\Wine\\Sukuna.Entity\\Sukuna.Common.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\loicm\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.17\\microsoft.windowsdesktop.app.ref.7.0.17.nupkg.sha512",
     "C:\\Users\\loicm\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.17\\microsoft.netcore.app.ref.7.0.17.nupkg.sha512",

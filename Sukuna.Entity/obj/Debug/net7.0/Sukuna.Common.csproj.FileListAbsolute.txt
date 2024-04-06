@@ -32,3 +32,15 @@ C:\loicm\dev\WineWeb.API\Sukuna.API\Sukuna.Entity\obj\Debug\net7.0\Sukuna.Common
 C:\loicm\dev\WineWeb.API\Sukuna.API\Sukuna.Entity\obj\Debug\net7.0\refint\Sukuna.Common.dll
 C:\loicm\dev\WineWeb.API\Sukuna.API\Sukuna.Entity\obj\Debug\net7.0\Sukuna.Common.pdb
 C:\loicm\dev\WineWeb.API\Sukuna.API\Sukuna.Entity\obj\Debug\net7.0\ref\Sukuna.Common.dll
+C:\loicm\dev\Wine\Sukuna.Entity\bin\Debug\net7.0\Sukuna.Common.deps.json
+C:\loicm\dev\Wine\Sukuna.Entity\bin\Debug\net7.0\Sukuna.Common.dll
+C:\loicm\dev\Wine\Sukuna.Entity\bin\Debug\net7.0\Sukuna.Common.pdb
+C:\loicm\dev\Wine\Sukuna.Entity\obj\Debug\net7.0\Sukuna.Common.GeneratedMSBuildEditorConfig.editorconfig
+C:\loicm\dev\Wine\Sukuna.Entity\obj\Debug\net7.0\Sukuna.Common.AssemblyInfoInputs.cache
+C:\loicm\dev\Wine\Sukuna.Entity\obj\Debug\net7.0\Sukuna.Common.AssemblyInfo.cs
+C:\loicm\dev\Wine\Sukuna.Entity\obj\Debug\net7.0\Sukuna.Common.csproj.CoreCompileInputs.cache
+C:\loicm\dev\Wine\Sukuna.Entity\obj\Debug\net7.0\Sukuna.Common.sourcelink.json
+C:\loicm\dev\Wine\Sukuna.Entity\obj\Debug\net7.0\Sukuna.Common.dll
+C:\loicm\dev\Wine\Sukuna.Entity\obj\Debug\net7.0\refint\Sukuna.Common.dll
+C:\loicm\dev\Wine\Sukuna.Entity\obj\Debug\net7.0\Sukuna.Common.pdb
+C:\loicm\dev\Wine\Sukuna.Entity\obj\Debug\net7.0\ref\Sukuna.Common.dll

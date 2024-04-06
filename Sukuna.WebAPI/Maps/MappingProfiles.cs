@@ -12,6 +12,14 @@ namespace Sukuna.WebAPI.Maps
             CreateMap<TvaTypeResource, TvaType>();
             CreateMap<ArticleResource, Article>();
             CreateMap<TvaType, TvaTypeResource>();
+            CreateMap<Client,  ClientResource>();
+            CreateMap<ClientResource, Client>();
+            CreateMap<User, UserResource>();
+            CreateMap<UserResource, User>();
+            CreateMap<OrderResource, OrderLine>();
+            CreateMap<OrderLine, OrderResource>();
+            CreateMap<Supplier, SupplierResource>();
+            CreateMap<SupplierResource, Supplier>();
         }
     }
 }

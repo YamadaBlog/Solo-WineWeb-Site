@@ -1,13 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Sukuna.Business.Interfaces;
+﻿using Sukuna.DataAccess.Data;
 using Sukuna.Common.Models;
-using Sukuna.DataAccess.Data;
-using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Sukuna.Common.Resources;
+using Sukuna.Business.Interfaces;
 
 namespace Sukuna.Service.Services;
 
@@ -19,9 +13,23 @@ public class TvaTypeService : ITvaTypeService
     {
         _context = context;
     }
-    public TvaType GetTvaType(int tvaTypeID)
+
+    public bool CreateTvaType(TvaType tvaType)
     {
-        return _context.TvaTypes.Where(r => r.ID == tvaTypeID).Include(e => e.Articles).FirstOrDefault();
+        _context.Add(tvaType);
+
+        return Save();
+    }
+
+    public TvaType GetTvaTypeTrimToUpper(TvaTypeResource tvaTypeCreate)
+    {
+        return GetTvaTypes().Where(c => c.Nom.Trim().ToUpper() == tvaTypeCreate.Nom.TrimEnd().ToUpper())
+            .FirstOrDefault();
+    }
+
+    public ICollection<TvaType> GetTvaTypes()
+    {
+        return _context.TvaTypes.OrderBy(p => p.ID).ToList();
     }
 
     public bool Save()
@@ -29,4 +37,6 @@ public class TvaTypeService : ITvaTypeService
         var saved = _context.SaveChanges();
         return saved > 0 ? true : false;
     }
+
+
 }

@@ -8,7 +8,11 @@ namespace Sukuna.Business.Interfaces;
 public interface IArticleService
 {
     Article GetArticleTrimToUpper(ArticleResource articleCreate);
-    bool CreateArticle(int clientOrderID, int supplierOrderID, Article article);
+    // bool CreateArticle(int clientOrderId, int supplierOrderId, Article article);
+    bool CreateArticle(Article article);
     ICollection<Article> GetArticles();
+    Article GetArticle(int articleId);
+    bool ArticleExists(int articleId);
+
     bool Save();
 }

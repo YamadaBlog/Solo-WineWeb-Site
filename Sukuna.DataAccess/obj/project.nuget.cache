@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "tm0H/FHEh9WtrN+xs2m04O7nEGSFBaSRE8W7Pg1CYn8E/Ja92upqcxDVAM2K6R8mK9p7AKXkYbcPkcqp8b3AGA==",
+  "dgSpecHash": "n49QV8jGg4yiHrevArrPcYuaFQJ5Ud9zqtZMjJamKR/b8ZipijjW9AeGY5j0gmMGrhCJh4knUslEiE7sW4XQ1A==",
   "success": true,
-  "projectFilePath": "C:\\loicm\\dev\\WineWeb.API\\Sukuna.API\\Sukuna.DataAccess\\Sukuna.DataAccess.csproj",
+  "projectFilePath": "C:\\loicm\\dev\\Wine\\Sukuna.DataAccess\\Sukuna.DataAccess.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\loicm\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\loicm\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",

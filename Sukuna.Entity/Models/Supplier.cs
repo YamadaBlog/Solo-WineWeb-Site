@@ -15,5 +15,6 @@ namespace Sukuna.Common.Models
         public string Adresse { get; set; }
         public string Email { get; set; }
         public ICollection<SupplierOrder> SupplierOrders { get; set; } // Relation un fournisseur a plusieurs commandes
+        public ICollection<Article> Articles { get; set; } 
     }
 }

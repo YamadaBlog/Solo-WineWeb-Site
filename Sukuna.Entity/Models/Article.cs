@@ -12,6 +12,8 @@ namespace Sukuna.Common.Models
         public int QuantiteEnStock { get; set; }
         public int TvaTypeID { get; set; }
         public TvaType TvaType { get; set; }
+        public int SupplierID { get; set; }
+        public Supplier Supplier { get; set; }
 
         public ICollection<OrderLine> OrderLines { get; set; } // Relation un article à plusieurs lignes de commande
     }

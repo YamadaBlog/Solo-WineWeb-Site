@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ldDjnh/3mWTlazBpoJFKTGIuM19MsJHcAVwDpKECbZ1NorBn1TR+bd06vIdCYLUprlnDzyvp1JzljvRQVJJUZA==",
+  "dgSpecHash": "tv1fIsq/UczJFTsHxbGf/XCBEVV/RQ5hl+up/U2G0FGjNy+//Zf1Y5o4xY0i3l4jc60COooKDydlDESj9dwNlA==",
   "success": true,
-  "projectFilePath": "C:\\loicm\\dev\\WineWeb.API\\Sukuna.API\\Sukuna.Service\\Sukuna.Service.csproj",
+  "projectFilePath": "C:\\loicm\\dev\\Wine\\Sukuna.Service\\Sukuna.Service.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\loicm\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\loicm\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",

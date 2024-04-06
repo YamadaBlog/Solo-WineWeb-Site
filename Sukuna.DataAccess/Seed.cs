@@ -30,15 +30,21 @@ namespace Sukuna.DataAccess
                 context.SaveChanges();
             }
 
+            var supplier1 = new Supplier { Nom = "Supplier A", Adresse = "10 Rue du Commerce", Email = "supplierA@example.com" };
+            var supplier2 = new Supplier { Nom = "Supplier B", Adresse = "20 Avenue des Vins", Email = "supplierB@example.com" };
+
+            context.Suppliers.AddRange(supplier1, supplier2);
+            context.SaveChanges();
+
             // Remplir la base de données avec des données initiales
             var tvaType1 = new TvaType { Nom = "TVA normale", Taux = 20, Description = "TVA standard" };
             var tvaType2 = new TvaType { Nom = "TVA réduite", Taux = 10, Description = "TVA réduite pour certains produits" };
 
             context.TvaTypes.AddRange(tvaType1, tvaType2);
 
-            var article1 = new Article { Nom = "Vin rouge", Description = "Vin rouge de qualité", Prix = 15, QuantiteEnStock = 100, TvaType = tvaType1 };
-            var article2 = new Article { Nom = "Vin blanc", Description = "Vin blanc rafraîchissant", Prix = 12, QuantiteEnStock = 80, TvaType = tvaType1 };
-            var article3 = new Article { Nom = "Champagne", Description = "Champagne pétillant", Prix = 30, QuantiteEnStock = 50, TvaType = tvaType1 };
+            var article1 = new Article { Nom = "Vin rouge", Description = "Vin rouge de qualité", Prix = 15, QuantiteEnStock = 100, TvaType = tvaType1, Supplier = supplier1 };
+            var article2 = new Article { Nom = "Vin blanc", Description = "Vin blanc rafraîchissant", Prix = 12, QuantiteEnStock = 80, TvaType = tvaType1, Supplier = supplier2 };
+            var article3 = new Article { Nom = "Champagne", Description = "Champagne pétillant", Prix = 30, QuantiteEnStock = 50, TvaType = tvaType1, Supplier = supplier2 };
 
             context.Articles.AddRange(article1, article2, article3);
 
@@ -47,11 +53,6 @@ namespace Sukuna.DataAccess
 
             context.Clients.AddRange(client1, client2);
             context.SaveChanges();
-
-            var supplier1 = new Supplier { Nom = "Supplier A", Adresse = "10 Rue du Commerce", Email = "supplierA@example.com" };
-            var supplier2 = new Supplier { Nom = "Supplier B", Adresse = "20 Avenue des Vins", Email = "supplierB@example.com" };
-
-            context.Suppliers.AddRange(supplier1, supplier2);
 
             var user1 = new User { Nom = "Admin", Prenom = "Super", Email = "admin@example.com", MotDePasseHashe = "hashedpassword", Role = "Admin" };
             var user2 = new User { Nom = "Employé", Prenom = "Normal", Email = "employee@example.com", MotDePasseHashe = "hashedpassword", Role = "Employee" };

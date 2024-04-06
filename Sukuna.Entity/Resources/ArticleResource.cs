@@ -11,4 +11,5 @@ public class ArticleResource // Les ressources sont les saisies utilisateurs
     public int Prix { get; set; }
     public int QuantiteEnStock { get; set; }
     public int TvaTypeID { get; set; }
+    public int SupplierID { get; set; }
 }

@@ -22,7 +22,9 @@ public class ArticlesController : ControllerBase
     [HttpPost]
     [ProducesResponseType(204)]
     [ProducesResponseType(400)]
-    public IActionResult CreateArticle([FromQuery] int clientOrderID, [FromQuery] int supplierOrderID, [FromBody] ArticleResource articleCreate)
+
+    // public IActionResult CreateArticle([FromQuery] int clientOrderId, [FromQuery] int supplierOrderId, [FromBody] ArticleResource articleCreate)
+    public IActionResult CreateArticle([FromBody] ArticleResource articleCreate)
     {
         if (articleCreate == null)
             return BadRequest(ModelState);
@@ -40,13 +42,41 @@ public class ArticlesController : ControllerBase
 
         var articleMap = _mapper.Map<Article>(articleCreate);
 
-
-        if (!_articleService.CreateArticle(clientOrderID, supplierOrderID, articleMap))
+        // if (!_articleService.CreateArticle(clientOrderId, supplierOrderId, articleMap))
+        if (!_articleService.CreateArticle(articleMap))
         {
             ModelState.AddModelError("", "Something went wrong while savin");
             return StatusCode(500, ModelState);
         }
 
         return Ok("Successfully created");
+    }
+
+    [HttpGet]
+    [ProducesResponseType(200, Type = typeof(IEnumerable<Article>))]
+    public IActionResult GetArticles()
+    {
+        var articles = _mapper.Map<List<ArticleResource>>(_articleService.GetArticles());
+
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        return Ok(articles);
+    }
+
+    [HttpGet("{articleId}")]
+    [ProducesResponseType(200, Type = typeof(Article))]
+    [ProducesResponseType(400)]
+    public IActionResult GetPokemon(int articleId)
+    {
+        if (!_articleService.ArticleExists(articleId))
+            return NotFound();
+
+        var article = _mapper.Map<ArticleResource>(_articleService.GetArticle(articleId));
+
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        return Ok(article);
     }
 }

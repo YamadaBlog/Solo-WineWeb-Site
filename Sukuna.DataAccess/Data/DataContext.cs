@@ -27,6 +27,10 @@ namespace Sukuna.DataAccess.Data
                 .HasOne(p => p.TvaType)
                 .WithMany(pc => pc.Articles)
                 .HasForeignKey(p => p.TvaTypeID);
+            modelBuilder.Entity<Article>()
+                .HasOne(p => p.Supplier)
+                .WithMany(pc => pc.Articles)
+                .HasForeignKey(p => p.SupplierID);
 
             // Configurer la relation entre SupplierOrder et OrderLine
             modelBuilder.Entity<OrderLine>()
@@ -59,7 +63,6 @@ namespace Sukuna.DataAccess.Data
                 .WithMany(pc => pc.ClientOrders)
                 .HasForeignKey(p => p.ClientID);
 
-            // Ajouter d'autres configurations de relations si nécessaire
         }
     }
 }

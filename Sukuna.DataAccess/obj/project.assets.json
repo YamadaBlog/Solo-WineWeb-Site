@@ -2908,11 +2908,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\loicm\\dev\\WineWeb.API\\Sukuna.API\\Sukuna.DataAccess\\Sukuna.DataAccess.csproj",
+      "projectUniqueName": "C:\\loicm\\dev\\Wine\\Sukuna.DataAccess\\Sukuna.DataAccess.csproj",
       "projectName": "Sukuna.DataAccess",
-      "projectPath": "C:\\loicm\\dev\\WineWeb.API\\Sukuna.API\\Sukuna.DataAccess\\Sukuna.DataAccess.csproj",
+      "projectPath": "C:\\loicm\\dev\\Wine\\Sukuna.DataAccess\\Sukuna.DataAccess.csproj",
       "packagesPath": "C:\\Users\\loicm\\.nuget\\packages\\",
-      "outputPath": "C:\\loicm\\dev\\WineWeb.API\\Sukuna.API\\Sukuna.DataAccess\\obj\\",
+      "outputPath": "C:\\loicm\\dev\\Wine\\Sukuna.DataAccess\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -2934,8 +2934,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\loicm\\dev\\WineWeb.API\\Sukuna.API\\Sukuna.Entity\\Sukuna.Common.csproj": {
-              "projectPath": "C:\\loicm\\dev\\WineWeb.API\\Sukuna.API\\Sukuna.Entity\\Sukuna.Common.csproj"
+            "C:\\loicm\\dev\\Wine\\Sukuna.Entity\\Sukuna.Common.csproj": {
+              "projectPath": "C:\\loicm\\dev\\Wine\\Sukuna.Entity\\Sukuna.Common.csproj"
             }
           }
         }

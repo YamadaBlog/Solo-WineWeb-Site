@@ -2,6 +2,7 @@
 using Sukuna.Common.Models;
 using Sukuna.Common.Resources;
 using Sukuna.Business.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Sukuna.Service.Services;
 
@@ -16,10 +17,11 @@ public class ArticleService : IArticleService
         _context = context;
     }
 
-    public bool CreateArticle(int clientOrderID, int supplierOrderID, Article article)
+    // public bool CreateArticle(int clientOrderId, int supplierOrderId, Article article)
+    public bool CreateArticle(Article article)
     {
-        var clientOrder = _context.ClientOrders.Where(a => a.ID == clientOrderID).FirstOrDefault();
-        var supplierOrder = _context.SupplierOrders.Where(a => a.ID == supplierOrderID).FirstOrDefault();
+    /*  var clientOrder = _context.ClientOrders.Where(a => a.ID == clientOrderId).FirstOrDefault();
+        var supplierOrder = _context.SupplierOrders.Where(a => a.ID == supplierOrderId).FirstOrDefault();
 
         var orderLine = new OrderLine()
         {
@@ -28,7 +30,7 @@ public class ArticleService : IArticleService
             Article = article
         };
 
-        _context.Add(orderLine);
+        _context.Add(orderLine); Pour ajouter une ligne de commande en référence à un article */
 
         _context.Add(article);
 
@@ -44,6 +46,16 @@ public class ArticleService : IArticleService
     public ICollection<Article> GetArticles()
     {
         return _context.Articles.OrderBy(p => p.ID).ToList();
+    }
+
+    public Article GetArticle(int id)
+    {
+        return _context.Articles.Where(p => p.ID == id).FirstOrDefault();
+    }
+
+    public bool ArticleExists(int articleId)
+    {
+        return _context.Articles.Any(r => r.ID == articleId);
     }
 
     public bool Save()
