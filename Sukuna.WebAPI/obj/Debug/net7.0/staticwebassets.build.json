@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "tCifjImHRRxm7F0G+bg8UVXcgwcmXaNREwY9Eyk5EDc=",
+  "Source": "Sukuna.WebAPI",
+  "BasePath": "_content/Sukuna.WebAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

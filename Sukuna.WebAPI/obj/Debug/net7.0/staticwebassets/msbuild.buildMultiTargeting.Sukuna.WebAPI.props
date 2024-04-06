@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Sukuna.WebAPI.props" />
+</Project>

@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v7.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v7.0": {
+      "Sukuna.Business/1.0.0": {
+        "dependencies": {
+          "Sukuna.Common": "1.0.0"
+        },
+        "runtime": {
+          "Sukuna.Business.dll": {}
+        }
+      },
+      "Sukuna.Common/1.0.0": {
+        "runtime": {
+          "Sukuna.Common.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Sukuna.Business/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Sukuna.Common/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
