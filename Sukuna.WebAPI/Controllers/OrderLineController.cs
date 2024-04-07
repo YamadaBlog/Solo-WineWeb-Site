@@ -3,11 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 using Sukuna.Business.Interfaces;
 using Sukuna.Common.Models;
 using Sukuna.Common.Resources;
+using Sukuna.Service.Services;
 
 namespace Sukuna.WebAPI.Controllers;
 
 [ApiController]
-[Route("api/[controller]/sukuna")]
+[Route("api/[controller]")]
 public class OrderLinesController : ControllerBase
 {
     private readonly IOrderLineService _orderLineService;
@@ -81,6 +82,49 @@ public class OrderLinesController : ControllerBase
             return BadRequest();
 
         return Ok(orderLines);
+    }
+
+    [HttpGet("article/{articleId}")]
+    [ProducesResponseType(200, Type = typeof(OrderLine))]
+    [ProducesResponseType(400)]
+
+    public IActionResult GetOrderLinesForAArticle(int articleId)
+    {
+        var orderLines = _mapper.Map<List<OrderLineResource>>(_orderLineService.GetOrderLinesOfAArticle(articleId));
+
+        if (!ModelState.IsValid)
+            return BadRequest();
+
+        return Ok(orderLines);
+    }
+
+    [HttpPut("{orderLineId}")]
+    [ProducesResponseType(400)]
+    [ProducesResponseType(204)]
+    [ProducesResponseType(404)]
+    public IActionResult UpdateOrderLine(int orderLineId, [FromBody] OrderLineResource updatedOrderLine)
+    {
+        if (updatedOrderLine == null)
+            return BadRequest(ModelState);
+
+        if (orderLineId != updatedOrderLine.ID)
+            return BadRequest(ModelState);
+
+        if (!_orderLineService.OrderLineExistsById(orderLineId))
+            return NotFound();
+
+        if (!ModelState.IsValid)
+            return BadRequest();
+
+        var orderLineMap = _mapper.Map<OrderLine>(updatedOrderLine);
+
+        if (!_orderLineService.UpdateOrderLine(orderLineMap))
+        {
+            ModelState.AddModelError("", "Something went wrong updating owner");
+            return StatusCode(500, ModelState);
+        }
+
+        return Ok("Successfully Updated");
     }
 
     [HttpDelete("{orderLineId}")]

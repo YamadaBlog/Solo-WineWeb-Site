@@ -7,7 +7,7 @@ using Sukuna.Common.Resources;
 namespace Sukuna.WebAPI.Controllers;
 
 [ApiController]
-[Route("api/[controller]/sukuna")]
+[Route("api/[controller]")]
 public class TvaTypesController : ControllerBase
 {
     private readonly ITvaTypeService _tvaTypeService;

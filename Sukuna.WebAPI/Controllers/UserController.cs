@@ -7,7 +7,7 @@ using Sukuna.Common.Resources;
 namespace Sukuna.WebAPI.Controllers;
 
 [ApiController]
-[Route("api/[controller]/sukuna")]
+[Route("api/[controller]")]
 public class UsersController : ControllerBase
 {
     private readonly IUserService _userService;

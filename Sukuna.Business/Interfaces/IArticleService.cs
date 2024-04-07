@@ -1,18 +1,23 @@
 ﻿using Sukuna.Common.Models;
 using Sukuna.Common.Resources;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Sukuna.Business.Interfaces;
 
-// Besoin de boook resources from common bcs it takes the the parameters reuse in serive 
-
 public interface IArticleService
 {
-    Article GetArticleTrimToUpper(ArticleResource articleCreate);
-    // bool CreateArticle(int clientOrderId, int supplierOrderId, Article article);
     bool CreateArticle(Article article);
-    ICollection<Article> GetArticles();
     Article GetArticleById(int articleId);
-    bool ArticleExists(int articleId);
+    ICollection<Article> GetArticles();
+    ICollection<OrderLine> GetOrderLinesByArticle(int articleId);
+    bool UpdateArticle(Article article);
+    bool DeleteArticle(Article article);
+    Article ArticleExists(ArticleResource articleCreate);
+    bool ArticleExistsById(int articleId);
 
     bool Save();
 }

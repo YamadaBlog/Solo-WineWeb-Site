@@ -34,6 +34,15 @@ public class OrderLineService : IOrderLineService
     {
         return _context.OrderLines.Where(o => o.ClientOrder.ID == clientOrderId).ToList();
     }
+    public ICollection<OrderLine> GetOrderLinesOfAArticle(int articleId)
+    {
+        return _context.OrderLines.Where(o => o.Article.ID == articleId).ToList();
+    }
+    public bool UpdateOrderLine(OrderLine orderLine)
+    {
+        _context.Update(orderLine);
+        return Save();
+    }
     public bool DeleteOrderLines(List<OrderLine> orderLines) 
     { 
         _context.RemoveRange(orderLines);

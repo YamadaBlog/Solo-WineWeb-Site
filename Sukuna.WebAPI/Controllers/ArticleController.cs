@@ -7,12 +7,12 @@ using Sukuna.Common.Resources;
 namespace Sukuna.WebAPI.Controllers;
 
 [ApiController]
-[Route("api/[controller]/sukuna")]
+[Route("api/[controller]")]
 public class ArticlesController : ControllerBase
 {
     private readonly IArticleService _articleService;
     private readonly IMapper _mapper;
-    
+
     public ArticlesController(IArticleService articleService, IMapper mapper)
     {
         _articleService = articleService;
@@ -23,17 +23,17 @@ public class ArticlesController : ControllerBase
     [ProducesResponseType(204)]
     [ProducesResponseType(400)]
 
-    // public IActionResult CreateArticle([FromQuery] int clientOrderId, [FromQuery] int supplierOrderId, [FromBody] ArticleResource articleCreate)
     public IActionResult CreateArticle([FromBody] ArticleResource articleCreate)
     {
         if (articleCreate == null)
             return BadRequest(ModelState);
 
-        var articles = _articleService.GetArticleTrimToUpper(articleCreate);
+        // Vérifie si article existe à partir du nom
+        var articles = _articleService.ArticleExists(articleCreate);
 
         if (articles != null)
         {
-            ModelState.AddModelError("", "Owner already exists");
+            ModelState.AddModelError("", "Client doesn't exists or Article already exists");
             return StatusCode(422, ModelState);
         }
 
@@ -42,7 +42,6 @@ public class ArticlesController : ControllerBase
 
         var articleMap = _mapper.Map<Article>(articleCreate);
 
-        // if (!_articleService.CreateArticle(clientOrderId, supplierOrderId, articleMap))
         if (!_articleService.CreateArticle(articleMap))
         {
             ModelState.AddModelError("", "Something went wrong while savin");
@@ -50,6 +49,37 @@ public class ArticlesController : ControllerBase
         }
 
         return Ok("Successfully created");
+    }
+
+    [HttpGet("{articleId}/orderLines")]
+    public IActionResult GetOrderLinesByArticle(int articleId)
+    {
+        if (!_articleService.ArticleExistsById(articleId))
+            return NotFound();
+
+        var orderLines = _mapper.Map<List<OrderLineResource>>(
+            _articleService.GetOrderLinesByArticle(articleId));
+
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        return Ok(orderLines);
+    }
+
+    [HttpGet("{articleId}")]
+    [ProducesResponseType(200, Type = typeof(Article))]
+    [ProducesResponseType(400)]
+    public IActionResult GetArticleById(int articleId)
+    {
+        if (!_articleService.ArticleExistsById(articleId))
+            return NotFound();
+
+        var article = _mapper.Map<ArticleResource>(_articleService.GetArticleById(articleId));
+
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        return Ok(article);
     }
 
     [HttpGet]
@@ -64,19 +94,57 @@ public class ArticlesController : ControllerBase
         return Ok(articles);
     }
 
-    [HttpGet("{articleId}")]
-    [ProducesResponseType(200, Type = typeof(Article))]
+    [HttpPut("{articleId}")]
     [ProducesResponseType(400)]
-    public IActionResult GetArticleById(int articleId)
+    [ProducesResponseType(204)]
+    [ProducesResponseType(404)]
+    public IActionResult UpdateArticle(int articleId, [FromBody] ArticleResource updatedArticle)
     {
-        if (!_articleService.ArticleExists(articleId))
+        if (updatedArticle == null)
+            return BadRequest(ModelState);
+
+        if (articleId != updatedArticle.ID)
+            return BadRequest(ModelState);
+
+        if (!_articleService.ArticleExistsById(articleId))
             return NotFound();
 
-        var article = _mapper.Map<ArticleResource>(_articleService.GetArticleById(articleId));
+        if (!ModelState.IsValid)
+            return BadRequest();
+
+        var articleMap = _mapper.Map<Article>(updatedArticle);
+
+        if (!_articleService.UpdateArticle(articleMap))
+        {
+            ModelState.AddModelError("", "Something went wrong updating owner");
+            return StatusCode(500, ModelState);
+        }
+
+        return Ok("Successfully Updated");
+    }
+
+
+    [HttpDelete("{articleId}")]
+    [ProducesResponseType(400)]
+    [ProducesResponseType(204)]
+    [ProducesResponseType(404)]
+    public IActionResult DeleteArticle(int articleId)
+    {
+        if (!_articleService.ArticleExistsById(articleId))
+        {
+            return NotFound();
+        }
+
+        var articleToDelete = _articleService.GetArticleById(articleId);
 
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
 
-        return Ok(article);
+        if (!_articleService.DeleteArticle(articleToDelete))
+        {
+            ModelState.AddModelError("", "Something went wrong deleting article");
+        }
+
+        return Ok("Successfully deleted");
     }
 }

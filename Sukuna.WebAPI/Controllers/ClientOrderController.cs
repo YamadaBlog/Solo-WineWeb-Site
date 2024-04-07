@@ -7,7 +7,7 @@ using Sukuna.Common.Resources;
 namespace Sukuna.WebAPI.Controllers;
 
 [ApiController]
-[Route("api/[controller]/sukuna")]
+[Route("api/[controller]")]
 public class ClientOrdersController : ControllerBase
 {
     private readonly IClientOrderService _clientOrderService;
@@ -52,7 +52,7 @@ public class ClientOrdersController : ControllerBase
     }
 
     [HttpGet("{clientOrderId}/orderLines")]
-    public IActionResult GetOrderLinesByAClientOrder(int clientOrderId)
+    public IActionResult GetOrderLinesByClientOrder(int clientOrderId)
     {
         if (!_clientOrderService.ClientOrderExistsById(clientOrderId))
             return NotFound();
@@ -69,7 +69,7 @@ public class ClientOrdersController : ControllerBase
     [HttpGet("{clientOrderId}")]
     [ProducesResponseType(200, Type = typeof(ClientOrder))]
     [ProducesResponseType(400)]
-    public IActionResult GetClientOrder(int clientOrderId)
+    public IActionResult GetClientOrderById(int clientOrderId)
     {
         if (!_clientOrderService.ClientOrderExistsById(clientOrderId))
             return NotFound();
@@ -84,7 +84,7 @@ public class ClientOrdersController : ControllerBase
 
     [HttpGet]
     [ProducesResponseType(200, Type = typeof(IEnumerable<ClientOrder>))]
-    public IActionResult GetReviewers()
+    public IActionResult GetClientOrders()
     {
         var clientOrders = _mapper.Map<List<ClientOrderResource>>(_clientOrderService.GetClientOrders());
 
