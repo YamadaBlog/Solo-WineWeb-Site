@@ -10,8 +10,14 @@ namespace Sukuna.Business.Interfaces;
 
 public interface IClientService
 {
-    Client GetClientTrimToUpper(ClientResource clientCreate);
     bool CreateClient(Client client);
+    Client GetClientById(int clientId);
     ICollection<Client> GetClients();
+    ICollection<ClientOrder> GetClientOrdersByClient(int clientId);
+    bool UpdateClient(Client client);
+    bool DeleteClient(Client client);
+    bool ClientExists(ClientResource clientCreate);
+    bool ClientExistsById(int clientId);
+
     bool Save();
 }

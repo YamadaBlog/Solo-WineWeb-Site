@@ -1,7 +1,8 @@
-﻿using Sukuna.DataAccess.Data;
+﻿using Sukuna.Business.Interfaces;
 using Sukuna.Common.Models;
 using Sukuna.Common.Resources;
-using Sukuna.Business.Interfaces;
+using Sukuna.DataAccess.Data;
+
 
 namespace Sukuna.Service.Services;
 
@@ -21,15 +22,40 @@ public class ClientService : IClientService
         return Save();
     }
 
-    public Client GetClientTrimToUpper(ClientResource clientCreate)
-    {
-        return GetClients().Where(c => c.Nom.Trim().ToUpper() == clientCreate.Nom.TrimEnd().ToUpper())
-            .FirstOrDefault();
-    }
-
     public ICollection<Client> GetClients()
     {
         return _context.Clients.OrderBy(p => p.ID).ToList();
+    }
+    public Client GetClientById(int clientId)
+    {
+        return _context.Clients.Where(c => c.ID == clientId).FirstOrDefault();
+    }
+
+    public ICollection<ClientOrder> GetClientOrdersByClient(int clientId)
+    {
+        return _context.ClientOrders.Where(r => r.Client.ID == clientId).ToList();
+    }
+
+    public bool UpdateClient(Client client)
+    {
+        _context.Update(client);
+        return Save();
+    }
+    public bool DeleteClient(Client client)
+    {
+        _context.Remove(client);
+        return Save();
+    }
+
+    public bool ClientExists(ClientResource clientCreate)
+    {
+        return _context.Clients.Any(r => r.ID == clientCreate.ID);
+    }
+
+    public bool ClientExistsById(int clientId)
+    {
+        return _context.Clients.Any(r => r.ID == clientId);
+
     }
 
     public bool Save()
@@ -37,6 +63,4 @@ public class ClientService : IClientService
         var saved = _context.SaveChanges();
         return saved > 0 ? true : false;
     }
-
-
 }

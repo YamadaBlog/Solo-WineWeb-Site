@@ -6,13 +6,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sukuna.Business.Interfaces
+namespace Sukuna.Business.Interfaces;
+
+public interface IUserService
 {
-    public interface IUserService
-    {
-        User GetUserTrimToUpper(UserResource userCreate);
-        bool CreateUser(User user);
-        ICollection<User> GetUsers();
-        bool Save();
-    }
+    bool CreateUser(User user);
+    User GetUserById(int userId);
+    ICollection<User> GetUsers();
+    ICollection<SupplierOrder> GetSupplierOrdersByUser(int userId);
+    bool UpdateUser(User user);
+    bool DeleteUser(User user);
+    bool UserExists(UserResource userCreate);
+    bool UserExistsById(int userId);
+
+    bool Save();
 }
