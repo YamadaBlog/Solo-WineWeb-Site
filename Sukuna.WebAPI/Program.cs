@@ -1,9 +1,12 @@
-
 using Microsoft.EntityFrameworkCore;
 using Sukuna.DataAccess.Data;
 using Sukuna.DataAccess;
 using Sukuna.Service.Services;
 using Sukuna.Business.Interfaces;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace Sukuna.WebAPI
 {
@@ -11,63 +14,85 @@ namespace Sukuna.WebAPI
     {
         public static void Main(string[] args)
         {
+            var host = CreateHostBuilder(args).Build();
 
-            var builder = WebApplication.CreateBuilder(args);
-
-            // Add services to the container.
-
-            builder.Services.AddControllers();
-            builder.Services.AddTransient<Seed>();
-            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-            builder.Services.AddScoped<IArticleService, ArticleService>();
-            builder.Services.AddScoped<IClientService, ClientService>();
-            builder.Services.AddScoped<IUserService, UserService>();
-            builder.Services.AddScoped<ITvaTypeService, TvaTypeService>();
-            builder.Services.AddScoped<IOrderLineService, OrderLineService>();
-            builder.Services.AddScoped<ISupplierService, SupplierService>();
-            builder.Services.AddScoped<ISupplierOrderService, SupplierOrderService>();
-            builder.Services.AddScoped<IClientOrderService, ClientOrderService>();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
-            builder.Services.AddScoped<DataContext>();
-            builder.Services.AddDbContext<DataContext>(option =>
-            {
-                option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-                option.EnableSensitiveDataLogging();
-            });
-
-            var app = builder.Build();
-
+            // Seed data if necessary
             if (args.Length == 1 && args[0].ToLower() == "seeddata")
-                SeedData(app);
+                SeedData(host);
 
-            void SeedData(IHost app)
-            {
-                var scopedFactory = app.Services.GetService<IServiceScopeFactory>();
-
-                using (var scope = scopedFactory.CreateScope())
-                {
-                    var service = scope.ServiceProvider.GetService<Seed>();
-                    service.SeedDataContext();
-                }
-            }
-
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
-
-            app.UseHttpsRedirection();
-
-            app.UseAuthorization();
-
-
-            app.MapControllers();
-
-            app.Run();
+            host.Run();
         }
+
+        private static void SeedData(IHost host)
+        {
+            using (var scope = host.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                var seed = services.GetRequiredService<Seed>();
+                seed.SeedDataContext();
+            }
+        }
+
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.ConfigureServices((hostContext, services) =>
+                    {
+                        services.AddCors(options =>
+                        {
+                            options.AddPolicy("AllowLocalhost3000",
+                                builder =>
+                                {
+                                    builder.WithOrigins("http://localhost:3000")
+                                           .AllowAnyHeader()
+                                           .AllowAnyMethod();
+                                });
+                        });
+
+                        services.AddControllers();
+
+                        services.AddTransient<Seed>();
+                        services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+                        services.AddScoped<IArticleService, ArticleService>();
+                        services.AddScoped<IClientService, ClientService>();
+                        services.AddScoped<IUserService, UserService>();
+                        services.AddScoped<ITvaTypeService, TvaTypeService>();
+                        services.AddScoped<IOrderLineService, OrderLineService>();
+                        services.AddScoped<ISupplierService, SupplierService>();
+                        services.AddScoped<ISupplierOrderService, SupplierOrderService>();
+                        services.AddScoped<IClientOrderService, ClientOrderService>();
+
+                        services.AddScoped<DataContext>();
+                        services.AddDbContext<DataContext>(option =>
+                        {
+                            option.UseSqlServer(hostContext.Configuration.GetConnectionString("DefaultConnection"));
+                            option.EnableSensitiveDataLogging();
+                        });
+
+                        services.AddSwaggerGen();
+                    })
+                    .Configure(app =>
+                    {
+                        var env = app.ApplicationServices.GetRequiredService<IWebHostEnvironment>();
+
+                        if (env.IsDevelopment())
+                        {
+                            app.UseSwagger();
+                            app.UseSwaggerUI();
+                        }
+
+                        app.UseHttpsRedirection();
+                        app.UseRouting();
+                        app.UseCors("AllowLocalhost3000");
+                        app.UseAuthorization();
+
+                        app.UseEndpoints(endpoints =>
+                        {
+                            endpoints.MapControllers();
+                        });
+                    });
+                });
     }
 }

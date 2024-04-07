@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Sukuna.WebAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+75f72ea607ae3eec1d37673c4755d93a29af5ed6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+18d2ee6f7b07a26223f36dd76c4fb49e2013c1c8")]
 [assembly: System.Reflection.AssemblyProductAttribute("Sukuna.WebAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Sukuna.WebAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
