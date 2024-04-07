@@ -30,6 +30,10 @@ public class OrderLineService : IOrderLineService
     {
         return _context.OrderLines.Where(o => o.ID == orderLineId).FirstOrDefault();
     }
+    public ICollection<OrderLine> GetOrderLinesOfASupplierOrder(int supplierOrderId)
+    {
+        return _context.OrderLines.Where(o => o.SupplierOrder.ID == supplierOrderId).ToList();
+    }
     public ICollection<OrderLine> GetOrderLinesOfAClientOrder(int clientOrderId)
     {
         return _context.OrderLines.Where(o => o.ClientOrder.ID == clientOrderId).ToList();

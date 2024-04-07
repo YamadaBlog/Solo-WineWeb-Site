@@ -84,6 +84,20 @@ public class OrderLinesController : ControllerBase
         return Ok(orderLines);
     }
 
+    [HttpGet("supplierOrder/{supplierOrderId}")]
+    [ProducesResponseType(200, Type = typeof(OrderLine))]
+    [ProducesResponseType(400)]
+
+    public IActionResult GetOrderLinesForASupplierOrder(int supplierOrderId)
+    {
+        var orderLines = _mapper.Map<List<OrderLineResource>>(_orderLineService.GetOrderLinesOfASupplierOrder(supplierOrderId));
+
+        if (!ModelState.IsValid)
+            return BadRequest();
+
+        return Ok(orderLines);
+    }
+
     [HttpGet("article/{articleId}")]
     [ProducesResponseType(200, Type = typeof(OrderLine))]
     [ProducesResponseType(400)]

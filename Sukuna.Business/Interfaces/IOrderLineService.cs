@@ -15,6 +15,7 @@ public interface IOrderLineService
     OrderLine GetOrderLineById(int orderLineId);
     ICollection<OrderLine> GetOrderLines();
     ICollection<OrderLine> GetOrderLinesOfAClientOrder(int clientOrderId);
+    ICollection<OrderLine> GetOrderLinesOfASupplierOrder(int supplierOrderId);
     ICollection<OrderLine> GetOrderLinesOfAArticle(int articleId);
     bool UpdateOrderLine(OrderLine orderLine);
     bool DeleteOrderLines(List<OrderLine> orderLines);

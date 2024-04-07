@@ -6,13 +6,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sukuna.Business.Interfaces
+namespace Sukuna.Business.Interfaces;
+
+public interface ITvaTypeService
 {
-    public interface ITvaTypeService
-    {
-        TvaType GetTvaTypeTrimToUpper(TvaTypeResource tvaTypeCreate);
-        bool CreateTvaType(TvaType tvaType);
-        ICollection<TvaType> GetTvaTypes();
-        bool Save();
-    }
+    bool CreateTvaType(TvaType tvaType);
+    TvaType GetTvaTypeById(int tvaTypeId);
+    ICollection<TvaType> GetTvaTypes();
+    bool UpdateTvaType(TvaType tvaType);
+    bool DeleteTvaType(TvaType tvaType);
+    TvaType TvaTypeExists(TvaTypeResource tvaTypeCreate);
+    bool TvaTypeExistsById(int tvaTypeId);
+
+    bool Save();
 }
