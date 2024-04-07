@@ -48,7 +48,7 @@ public class ArticleService : IArticleService
         return _context.Articles.OrderBy(p => p.ID).ToList();
     }
 
-    public Article GetArticle(int id)
+    public Article GetArticleById(int id)
     {
         return _context.Articles.Where(p => p.ID == id).FirstOrDefault();
     }

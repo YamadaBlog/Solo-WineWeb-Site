@@ -16,10 +16,14 @@ namespace Sukuna.WebAPI.Maps
             CreateMap<ClientResource, Client>();
             CreateMap<User, UserResource>();
             CreateMap<UserResource, User>();
-            CreateMap<OrderResource, OrderLine>();
-            CreateMap<OrderLine, OrderResource>();
+            CreateMap<OrderLineResource, OrderLine>();
+            CreateMap<OrderLine, OrderLineResource>();
             CreateMap<Supplier, SupplierResource>();
             CreateMap<SupplierResource, Supplier>();
+            CreateMap<SupplierOrderResource, SupplierOrder>();
+            CreateMap<SupplierOrder, SupplierOrderResource>();
+            CreateMap<ClientOrder, ClientOrderResource>();
+            CreateMap<ClientOrderResource, ClientOrder>();
         }
     }
 }

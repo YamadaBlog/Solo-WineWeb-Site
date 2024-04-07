@@ -67,12 +67,12 @@ public class ArticlesController : ControllerBase
     [HttpGet("{articleId}")]
     [ProducesResponseType(200, Type = typeof(Article))]
     [ProducesResponseType(400)]
-    public IActionResult GetPokemon(int articleId)
+    public IActionResult GetArticleById(int articleId)
     {
         if (!_articleService.ArticleExists(articleId))
             return NotFound();
 
-        var article = _mapper.Map<ArticleResource>(_articleService.GetArticle(articleId));
+        var article = _mapper.Map<ArticleResource>(_articleService.GetArticleById(articleId));
 
         if (!ModelState.IsValid)
             return BadRequest(ModelState);

@@ -28,6 +28,7 @@ public class ClientsController : ControllerBase
         if (clientCreate == null)
             return BadRequest(ModelState);
 
+        // Vérifie si client existe à partir du nom
         var clients = _clientService.GetClientTrimToUpper(clientCreate);
 
         if (clients != null)
