@@ -23,7 +23,7 @@ namespace Sukuna.WebAPI
             builder.Services.AddScoped<IClientService, ClientService>();
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<ITvaTypeService, TvaTypeService>();
-            builder.Services.AddScoped<IOrderService, OrderService>();
+            builder.Services.AddScoped<IOrderLineService, OrderLineService>();
             builder.Services.AddScoped<ISupplierService, SupplierService>();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
