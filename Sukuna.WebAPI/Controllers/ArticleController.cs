@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Sukuna.Business.Interfaces;
 using Sukuna.Common.Models;
 using Sukuna.Common.Resources;
+using Sukuna.Service.Services;
 
 namespace Sukuna.WebAPI.Controllers;
 
@@ -64,6 +65,20 @@ public class ArticlesController : ControllerBase
             return BadRequest(ModelState);
 
         return Ok(orderLines);
+    }
+
+    [HttpGet("supplier/{supplierId}")]
+    [ProducesResponseType(200, Type = typeof(Article))]
+    [ProducesResponseType(400)]
+
+    public IActionResult GetArticlesOfASupplier(int supplierId)
+    {
+        var articles = _mapper.Map<List<ArticleResource>>(_articleService.GetArticlesOfASupplier(supplierId));
+
+        if (!ModelState.IsValid)
+            return BadRequest();
+
+        return Ok(articles);
     }
 
     [HttpGet("{articleId}")]

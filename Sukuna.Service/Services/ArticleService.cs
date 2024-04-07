@@ -36,6 +36,11 @@ public class ArticleService : IArticleService
         return _context.OrderLines.Where(r => r.Article.ID == articleId).ToList();
     }
 
+    public ICollection<Article> GetArticlesOfASupplier(int supplierId)
+    {
+        return _context.Articles.Where(o => o.Supplier.ID == supplierId).ToList();
+    }
+
     public bool UpdateArticle(Article article)
     {
         _context.Update(article);

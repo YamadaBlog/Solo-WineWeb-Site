@@ -14,6 +14,7 @@ public interface IArticleService
     Article GetArticleById(int articleId);
     ICollection<Article> GetArticles();
     ICollection<OrderLine> GetOrderLinesByArticle(int articleId);
+    ICollection<Article> GetArticlesOfASupplier(int supplierId);
     bool UpdateArticle(Article article);
     bool DeleteArticle(Article article);
     Article ArticleExists(ArticleResource articleCreate);

@@ -1,7 +1,8 @@
-﻿using Sukuna.DataAccess.Data;
+﻿using Sukuna.Business.Interfaces;
 using Sukuna.Common.Models;
 using Sukuna.Common.Resources;
-using Sukuna.Business.Interfaces;
+using Sukuna.DataAccess.Data;
+
 
 namespace Sukuna.Service.Services;
 
@@ -21,15 +22,40 @@ public class SupplierService : ISupplierService
         return Save();
     }
 
-    public Supplier GetSupplierTrimToUpper(SupplierResource supplierCreate)
+    public ICollection<Supplier> GetSuppliers()
+    {
+        return _context.Suppliers.OrderBy(p => p.ID).ToList();
+    }
+    public ICollection<Article> GetArticlesBySupplier(int supplierId)
+    {
+        return _context.Articles.Where(r => r.Supplier.ID == supplierId).ToList();
+    }
+    public Supplier GetSupplierById(int supplierId)
+    {
+        return _context.Suppliers.Where(c => c.ID == supplierId).FirstOrDefault();
+    }
+
+    public bool UpdateSupplier(Supplier supplier)
+    {
+        _context.Update(supplier);
+        return Save();
+    }
+    public bool DeleteSupplier(Supplier supplier)
+    {
+        _context.Remove(supplier);
+        return Save();
+    }
+
+    public Supplier SupplierExists(SupplierResource supplierCreate)
     {
         return GetSuppliers().Where(c => c.Nom.Trim().ToUpper() == supplierCreate.Nom.TrimEnd().ToUpper())
             .FirstOrDefault();
     }
 
-    public ICollection<Supplier> GetSuppliers()
+    public bool SupplierExistsById(int supplierId)
     {
-        return _context.Suppliers.OrderBy(p => p.ID).ToList();
+        return _context.Suppliers.Any(r => r.ID == supplierId);
+
     }
 
     public bool Save()
@@ -37,6 +63,4 @@ public class SupplierService : ISupplierService
         var saved = _context.SaveChanges();
         return saved > 0 ? true : false;
     }
-
-
 }
