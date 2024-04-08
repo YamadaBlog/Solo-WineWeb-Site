@@ -9,4 +9,5 @@ public class ClientResource
     public string Prenom { get; set; }
     public string Adresse { get; set; }
     public string Email { get; set; }
+    public string MotDePasseHashe { get; set; }
 }

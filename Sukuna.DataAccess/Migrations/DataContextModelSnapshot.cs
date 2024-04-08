@@ -33,6 +33,9 @@ namespace Sukuna.DataAccess.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Nom")
                         .HasColumnType("nvarchar(max)");
 
@@ -69,6 +72,9 @@ namespace Sukuna.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MotDePasseHashe")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nom")

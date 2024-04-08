@@ -11,6 +11,7 @@ namespace Sukuna.Common.Models
         public string Prenom { get; set; }
         public string Adresse { get; set; }
         public string Email { get; set; }
+        public string MotDePasseHashe { get; set; }
         public ICollection<ClientOrder> ClientOrders { get; set; } // Relation un client a plusieurs commandes
     }
 }
