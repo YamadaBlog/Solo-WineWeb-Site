@@ -12,6 +12,7 @@ public interface IClientService
 {
     bool CreateClient(Client client);
     Client GetClientById(int clientId);
+    Client GetAuthauthClient(string clientEmail, string clientMpd);
     ICollection<Client> GetClients();
     ICollection<ClientOrder> GetClientOrdersByClient(int clientId);
     bool UpdateClient(Client client);

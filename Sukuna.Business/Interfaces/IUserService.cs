@@ -13,6 +13,7 @@ public interface IUserService
     bool CreateUser(User user);
     User GetUserById(int userId);
     ICollection<User> GetUsers();
+    User GetAuthauthUser(string userEmail, string userMpd);
     ICollection<SupplierOrder> GetSupplierOrdersByUser(int userId);
     bool UpdateUser(User user);
     bool DeleteUser(User user);

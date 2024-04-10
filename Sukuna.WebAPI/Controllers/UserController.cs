@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Sukuna.Business.Interfaces;
 using Sukuna.Common.Models;
 using Sukuna.Common.Resources;
+using Sukuna.Service.Services;
 
 namespace Sukuna.WebAPI.Controllers;
 
@@ -64,6 +65,22 @@ public class UsersController : ControllerBase
             return BadRequest(ModelState);
 
         return Ok(userOrders);
+    }
+
+    [HttpPost("{userEmail},{userMdp}")]
+    [ProducesResponseType(200, Type = typeof(UserResource))]
+    [ProducesResponseType(400)]
+    [ProducesResponseType(401)]
+    public IActionResult GetAuthauthUser(string userEmail, string userMdp)
+    {
+        var user = _userService.GetAuthauthUser(userEmail, userMdp);
+
+        if (user == null)
+            return Unauthorized(); // L'authentification a échoué
+
+        var userResource = _mapper.Map<UserResource>(user);
+
+        return Ok(userResource); // Authentification réussie, retourne les données du user
     }
 
     [HttpGet("{userId}")]

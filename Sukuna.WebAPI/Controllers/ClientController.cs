@@ -52,7 +52,7 @@ public class ClientsController : ControllerBase
     }
 
     [HttpGet("{clientId}/clientOrders")]
-    public IActionResult GetLinesByClient(int clientId)
+    public IActionResult GetClientOrdersByClient(int clientId)
     {
         if (!_clientService.ClientExistsById(clientId))
             return NotFound();
@@ -80,6 +80,22 @@ public class ClientsController : ControllerBase
             return BadRequest(ModelState);
 
         return Ok(client);
+    }
+
+    [HttpPost("{clientEmail},{clientMdp}")]
+    [ProducesResponseType(200, Type = typeof(ClientResource))]
+    [ProducesResponseType(400)]
+    [ProducesResponseType(401)]
+    public IActionResult GetAuthauthClient(string clientEmail, string clientMdp)
+    {
+        var client = _clientService.GetAuthauthClient(clientEmail, clientMdp);
+
+        if (client == null)
+            return Unauthorized(); // L'authentification a échoué
+
+        var clientResource = _mapper.Map<ClientResource>(client);
+
+        return Ok(clientResource); // Authentification réussie, retourne les données du client
     }
 
     [HttpGet]

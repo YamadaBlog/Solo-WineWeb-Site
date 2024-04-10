@@ -22,6 +22,10 @@ public class UserService : IUserService
         return Save();
     }
 
+    public User GetAuthauthUser(string userEmail, string userMpd)
+    {
+        return _context.Users.Where(c => c.Email == userEmail && c.MotDePasseHashe == userMpd).FirstOrDefault();
+    }
     public ICollection<User> GetUsers()
     {
         return _context.Users.OrderBy(p => p.ID).ToList();

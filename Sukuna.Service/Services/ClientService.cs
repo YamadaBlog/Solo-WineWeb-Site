@@ -31,6 +31,10 @@ public class ClientService : IClientService
         return _context.Clients.Where(c => c.ID == clientId).FirstOrDefault();
     }
 
+    public Client GetAuthauthClient(string clientEmail, string clientMpd) {
+        return _context.Clients.Where(c => c.Email == clientEmail && c.MotDePasseHashe == clientMpd).FirstOrDefault();
+    }
+
     public ICollection<ClientOrder> GetClientOrdersByClient(int clientId)
     {
         return _context.ClientOrders.Where(r => r.Client.ID == clientId).ToList();
